@@ -1,11 +1,23 @@
-from payment import Payment
-from gate import Gate
+class Payment:
+    @property
+    def is_processed(self):
+        raise NotImplementedError()
+
+
+class Processor:
+    def process(self, payment: Payment):
+        raise NotImplementedError()
 
 
 def test_process_one_payment_should_success():
+    """
+    This feels wrong. Processors are not processing payments, they are authorizing, capturing, debiting etc.
+    How payments are processed depends on processor and payment in question. So our only way to control is to pick
+    this combination and hide how it's done for input. So processors are in general processing payments.
+    """
     payment = Payment()
-    gate = Gate(provider=Provider())
+    processor = Processor()
 
-    assert payment.is_initialised()
-    gate_response = gate.process(payment)
-    assert gate_response == GateResponse(...)
+    assert not payment.is_processed()
+    processor.process(payment)
+    assert payment.is_processed()

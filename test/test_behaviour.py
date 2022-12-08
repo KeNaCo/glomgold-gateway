@@ -1,12 +1,4 @@
-class Payment:
-    @property
-    def is_processed(self):
-        raise NotImplementedError()
-
-
-class Processor:
-    def process(self, payment: Payment):
-        raise NotImplementedError()
+from acquiring.domain import Payment, Processor
 
 
 def test_process_one_payment_should_success():

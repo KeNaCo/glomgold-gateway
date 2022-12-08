@@ -1,4 +1,4 @@
-from acquiring.domain import Payment, Processor
+from acquiring.domain import Payment, PaymentProcessor
 
 
 class StubPayment(Payment):
@@ -13,7 +13,7 @@ class StubPayment(Payment):
         self._processed = True
 
 
-class StubProcessor(Processor):
+class StubProcessor(PaymentProcessor):
     def process(self, payment: Payment):
         if isinstance(payment, StubPayment):
             payment.set_processed()

@@ -1,6 +1,8 @@
 from acquiring.domain import Payment, PaymentProcessor
 from acquiring.domain.stub_processor.stub_processor import StubPayment, StubProcessor
 
+from . import helpers
+
 
 def test_process_one_payment_should_be_processed():
     """
@@ -13,4 +15,4 @@ def test_process_one_payment_should_be_processed():
 
     assert not payment.is_processed
     processor.process(payment)
-    assert payment.is_processed
+    helpers.assert_PaymentIsProcessed(processor, payment)
